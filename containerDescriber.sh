@@ -15,15 +15,17 @@ do
   oc get po -n $namespace | cut -d " " -f 1 > "listOfPods.txt"
   oc describe ns $namespace >> ClusterDescription.txt
   echo **************************************************************** >> ClusterDescription.txt
-
+  
+  # Sub loop or each container
   podNames='listOfPods.txt'
   while read podName; do 
       if [[ "$podName" != "NAME" ]]; then
       oc describe po $podName -n $namespace >> ClusterDescription.txt
+      echo "*************************** Podname: $podName ************************" >> ClusterDescription.txt
   done < "$podNames"
   fi  
   
-  # Clean up
+  # Clean up 
   rm -rf listOfPods.txt
   
 done < "$input"
