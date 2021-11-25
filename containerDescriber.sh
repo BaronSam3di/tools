@@ -9,6 +9,7 @@ input="namespaces.txt"
 while IFS= read -r namespace 
 do
   if [[ "$namespace" != "NAME" ]]; then
+  echo "***************** Looking at $namespace **********************"
   echo "*************************** $namespace ************************" >> ClusterDescription.txt
   oc get po -n $namespace >> ClusterDescription.txt
   echo **************************************************************** >> ClusterDescription.txt
